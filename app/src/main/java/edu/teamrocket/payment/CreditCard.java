@@ -12,9 +12,37 @@ public class CreditCard {
         this.number = number;
     }
 
-    public boolean pay(double credit){
-        return this.credit >= credit;
+    public boolean pay(double quantity){
+        if (this.credit()>= quantity){
+            this.credit -= quantity;
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
+    public double credit(){
+        return this.credit;
+    }
 
+    public String number(){
+        return this.number;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder build = new StringBuilder();
+
+        build.append("owner: ");
+        build.append(this.owner);
+        build.append("\nnumber: ");
+        build.append(this.number());
+        build.append("\ncredit: ");
+        build.append(this.credit());
+        build.append(this.SYMBOL);
+
+        return build.toString();
+
+    }
 }
