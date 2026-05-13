@@ -17,7 +17,7 @@ public class Receptivo implements GuestDispatcher {
         return  instance == null ? instance = new Receptivo() : instance;
     }
 
-    public void registrar(GuestDispatcher registrado){
+    public void registra(GuestDispatcher registrado){
         this.registrados.add(registrado);
     }
 
