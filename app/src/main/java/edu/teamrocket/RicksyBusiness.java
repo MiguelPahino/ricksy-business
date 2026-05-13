@@ -25,12 +25,9 @@
 
 package edu.teamrocket;
 
-import edu.teamrocket.dispatchers.CrystalExpender;
-import edu.teamrocket.dispatchers.RickMenuDispatcher;
-import edu.teamrocket.dispatchers.UfosPark;
-import edu.teamrocket.payment.CreditCard;
-import edu.teamrocket.payment.PaymentMethod;
-import edu.teamrocket.receptivo.Receptivo;
+import edu.teamrocket.dispatchers.*;
+import edu.teamrocket.payment.*;
+import edu.teamrocket.receptivo.*;
 
 public class RicksyBusiness {
     
@@ -43,7 +40,7 @@ public class RicksyBusiness {
          * el crédito inicial es de 3000 EZIS
          */
 
-        PaymentMethod abradolph = new CreditCard("Abradolph Lincler", "4916119711304546");
+        CreditCard abradolph = new CreditCard("Abradolph Lincler", "4916119711304546");
         
         System.out.println("\n" + "Tarjeta de Abradolph" + "\n" + 
                                   "===================="        );
@@ -96,7 +93,7 @@ public class RicksyBusiness {
 
         System.out.println("\nLLega GearHead!\n" + 
                              "===============");
-        PaymentMethod gearHead = new CreditCard("Gearhead", "8888888888888888");
+        CreditCard gearHead = new CreditCard("Gearhead", "8888888888888888");
 
         gearHead.pay(2999); // le vacían la cartera
 
@@ -109,7 +106,7 @@ public class RicksyBusiness {
 
         System.out.println("\nLLega Squanchy!\n" + 
                              "==============");
-        PaymentMethod squanchy = new CreditCard("Squanchy", "4444444444444444");
+        CreditCard squanchy = new CreditCard("Squanchy", "4444444444444444");
         ufosPark.dispatch(squanchy);
         System.out.println("Su credito es: " + squanchy.credit());
         System.out.println("Su ovni es: " + ufosPark.getUfoOf(squanchy.number()));
@@ -119,7 +116,7 @@ public class RicksyBusiness {
 
         System.out.println("\nAlgun ovni para Morty?\n" + 
                              "======================");
-        PaymentMethod morty = new CreditCard("Morty", "0000000000000000");
+        CreditCard morty = new CreditCard("Morty", "0000000000000000");
         ufosPark.dispatch(morty);
         System.out.println("Su credito no ha cambiado: " + morty.credit());
         System.out.println("No hay ovni Morty: " + ufosPark.getUfoOf(morty.number()));
@@ -200,7 +197,7 @@ public class RicksyBusiness {
 
         System.out.println("\nLLega Birdpearson!\n" + 
                              "==================");
-        PaymentMethod birdpearson = new CreditCard("Birdpearson", "1111111111111111");
+        CreditCard birdpearson = new CreditCard("Birdpearson", "1111111111111111");
         receptivo.dispatch(birdpearson);
         mostrarReserva(birdpearson, packExpender, ufosPark);
 
@@ -233,9 +230,9 @@ public class RicksyBusiness {
 
         receptivo.registra(MenuDispatcher);
 
-        PaymentMethod[] cards = {abradolph, squanchy, morty, gearHead, birdpearson};
+        CreditCard[] cards = {abradolph, squanchy, morty, gearHead, birdpearson};
 
-        for (PaymentMethod card: cards) {
+        for (CreditCard card: cards) {
             receptivo.dispatch(card);
         }
 
@@ -246,13 +243,13 @@ public class RicksyBusiness {
         System.out.println("\nCreditos de los invitados/as:\n" + 
                              "=============================");
 
-        for (PaymentMethod card: cards) {
+        for (CreditCard card: cards) {
             System.out.println(card);
             System.out.println();
         }
     }
 
-    private static void mostrarReserva(PaymentMethod card, CrystalExpender expender, UfosPark ufos) {
+    private static void mostrarReserva(CreditCard card, CrystalExpender expender, UfosPark ufos) {
         System.out.println(card);
         System.out.println("Packs: " + expender.stock());
         System.out.println("Ovni: " + ufos.getUfoOf(card.number()));
