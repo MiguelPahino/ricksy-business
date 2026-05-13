@@ -1,15 +1,15 @@
 package edu.teamrocket.receptivo;
 
-import org.junit.Test;
-
-import edu.teamrocket.dispatchers.CrystalExpender;
-import edu.teamrocket.dispatchers.UfosParkTest;
 import edu.teamrocket.payment.CreditCard;
-import edu.teamrocket.payment.PaymentMethod;
+import edu.teamrocket.dispatchers.*;
 
-import static org.junit.Assert.*;
 
-import org.junit.Before;
+import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class ReceptivoTest {
 
@@ -17,7 +17,7 @@ public class ReceptivoTest {
     private UfosParkTest parkTest = null;
     private CrystalExpender packExpender = null;
 
-    @Before
+    @BeforeEach
     public void setupTest() {
 
         parkTest = new UfosParkTest();
@@ -41,8 +41,7 @@ public class ReceptivoTest {
 
     @Test
     public void dispatchTest() {
-ricksy.business
-        PaymentMethod card = new CreditCard("Abradolf Lincler", "4916119711304546");
+        CreditCard card = new CreditCard("Abradolf Lincler", "4916119711304546");
         receptivo.dispatch(card);
 
         assertEquals(2450, card.credit(), 0);
@@ -53,7 +52,7 @@ ricksy.business
     @Test
     public void dispatchNoCreditTest() {
 
-        PaymentMethod card = new CreditCard("Abradolf Lincler", "4916119711304546");
+        CreditCard card = new CreditCard("Abradolf Lincler", "4916119711304546");
         assertTrue(card.pay(2990));
         assertEquals(10, card.credit(), 0);
         receptivo.dispatch(card);

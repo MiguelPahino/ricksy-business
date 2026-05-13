@@ -1,27 +1,25 @@
 package edu.teamrocket.dispatchers;
 
-import org.junit.Test;
-
 import edu.teamrocket.payment.CreditCard;
-import edu.teamrocket.payment.PaymentMethod;
-
-import static org.junit.Assert.*;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.Before;
+import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class UfosParkTest {
 
     public UfosPark ufos = null;
     String[] ovnis = { "unx", "dox", "trex" };
 
-    @Before
+    @BeforeEach
     public void setupUfosPark() {
         ufos = new UfosPark();
-        assertNotNull("Parque de UFOS creados", ufos);
+        assertNotNull( ufos,"Parque de UFOS creados");
         for (String ovni : ovnis) {
 			ufos.add(ovni);
         }
@@ -40,7 +38,7 @@ public class UfosParkTest {
 
     @Test
     public void dispatchTest() {
-        PaymentMethod card = new CreditCard("Abradolf Lincler", "4916119711304546");
+        CreditCard card = new CreditCard("Abradolf Lincler", "4916119711304546");
         ufos.dispatch(card);
         assertTrue(ufos.containsCard(card.number()));
         List<String> cards = ufos.cardNumbers()
@@ -54,7 +52,7 @@ public class UfosParkTest {
 
     @Test
     public void dispatchNoCreditTest() {
-        PaymentMethod card = new CreditCard("Abradolf Lincler", "4916119711304546");
+        CreditCard card = new CreditCard("Abradolf Lincler", "4916119711304546");
         card.pay(2999);
         assertEquals(1, card.credit(), 0.1);
         ufos.dispatch(card);
@@ -64,7 +62,7 @@ public class UfosParkTest {
 
     @Test
     public void dispatchUfoAlreadyReservedTest() {
-        PaymentMethod card = new CreditCard("Abradolf Lincler", "4916119711304546");
+        CreditCard card = new CreditCard("Abradolf Lincler", "4916119711304546");
         ufos.dispatch(card);
         ufos.dispatch(card);
         List<String> cards = ufos.cardNumbers()
@@ -78,13 +76,13 @@ public class UfosParkTest {
 
     @Test
     public void dispatchNoUfoAvaliableTest() {
-        PaymentMethod abradolph = new CreditCard("Abradolf Lincler", "4916119711304546");
+        CreditCard abradolph = new CreditCard("Abradolf Lincler", "4916119711304546");
         ufos.dispatch(abradolph);
-        PaymentMethod squanchy = new CreditCard("Squanchy", "4444444444444444");
+        CreditCard squanchy = new CreditCard("Squanchy", "4444444444444444");
         ufos.dispatch(squanchy);
-        PaymentMethod birdpearson = new CreditCard("Birdpearson", "1111111111111111");
+        CreditCard birdpearson = new CreditCard("Birdpearson", "1111111111111111");
         ufos.dispatch(birdpearson);
-        PaymentMethod morty = new CreditCard("Morty", "0000000000000000");
+        CreditCard morty = new CreditCard("Morty", "0000000000000000");
         ufos.dispatch(morty);
 
         List<String> cards = ufos.cardNumbers()
@@ -98,7 +96,7 @@ public class UfosParkTest {
 
     @Test
     public void getUfoOfTest() {
-        PaymentMethod card = new CreditCard("Abradolf Lincler", "4916119711304546");
+        CreditCard card = new CreditCard("Abradolf Lincler", "4916119711304546");
         ufos.dispatch(card);
         assertTrue(ufos.toString().contains(ufos.getUfoOf(card.number())));
         assertEquals(2500, card.credit(), 0);
