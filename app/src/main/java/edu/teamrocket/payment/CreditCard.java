@@ -21,6 +21,10 @@ public class CreditCard {
             return false;
         }
     }
+    
+    public String cardOwner() {
+        return owner;
+    }
 
     public double credit(){
         return this.credit;
