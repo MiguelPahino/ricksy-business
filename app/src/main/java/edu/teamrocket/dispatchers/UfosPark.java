@@ -2,7 +2,7 @@ package edu.teamrocket.dispatchers;
 
 
 import java.util.Collection;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -12,7 +12,7 @@ import edu.teamrocket.receptivo.GuestDispatcher;
 public class UfosPark implements GuestDispatcher {
     
     private double fee = 500d;
-    private final Map<String,String> flota = new LinkedHashMap<String,String>();
+    private final Map<String,String> flota = new HashMap<String,String>();
 
     public UfosPark(){}
 
@@ -33,7 +33,7 @@ public class UfosPark implements GuestDispatcher {
 
     public String getUfoOf(String cardNumber){
         String ufoID = flota.entrySet().stream()
-        .filter(x-> x.getValue().equals(cardNumber))
+        .filter(x-> x.getValue() == cardNumber)
         .map(x -> x.getKey())
         .findFirst()
         .orElse(null);
@@ -42,7 +42,7 @@ public class UfosPark implements GuestDispatcher {
     }
 
     public boolean containsCard(String card){
-        return flota.entrySet().stream().anyMatch(x-> x.getValue().equals(card));
+        return flota.values().stream().anyMatch(x-> x == card);
     }
 
     public Collection<String> cardNumbers(){
@@ -54,17 +54,7 @@ public class UfosPark implements GuestDispatcher {
 
     @Override
     public String toString() {
-        StringBuilder build = new StringBuilder();
-        
-        flota.entrySet()
-        .stream()
-        .forEach(x -> {build.append( x.getKey());
-            build.append(": ");
-            build.append(x.getKey());
-            build.append( "\n");
-        });
-
-        return build.toString();
+        return flota.keySet().stream().sorted().toList().toString();
     }
 
 
