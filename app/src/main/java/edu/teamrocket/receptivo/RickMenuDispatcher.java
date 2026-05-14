@@ -14,8 +14,7 @@ public class RickMenuDispatcher implements GuestDispatcher {
 
     @Override
     public void dispatch(CreditCard card) {
-        if(stock > 0){
-            card.pay(price);
+        if(stock > 0 && card.pay(price)){
             stock --;
         }
     }
