@@ -13,7 +13,7 @@ public class CreditCard {
     }
 
     public boolean pay(double quantity){
-        if (this.credit()>= quantity){
+        if (this.credit()-1 >= quantity){
             this.credit -= quantity;
             return true;
         }
