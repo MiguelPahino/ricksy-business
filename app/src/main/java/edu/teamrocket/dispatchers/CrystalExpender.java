@@ -1,6 +1,6 @@
 package edu.teamrocket.dispatchers;
 
-import edu.teamrocket.payment.CreditCard;
+import edu.teamrocket.payment.PaymentMethod;
 import edu.teamrocket.receptivo.GuestDispatcher;
 
 public class CrystalExpender implements GuestDispatcher{
@@ -31,7 +31,7 @@ public class CrystalExpender implements GuestDispatcher{
     }
 
     @Override
-    public void dispatch(CreditCard card) {
+    public void dispatch(PaymentMethod card) {
         if(stock > 0 && card.pay(itemCost)){
             stock --;
         }

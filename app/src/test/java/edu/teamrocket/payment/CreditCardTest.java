@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class CreditCardTest {
 
-    private CreditCard card = null;
+    private PaymentMethod card = null;
 
     @BeforeEach
     public void setupCard() {

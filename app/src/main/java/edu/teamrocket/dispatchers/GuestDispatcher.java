@@ -1,8 +1,8 @@
 package edu.teamrocket.dispatchers;
 
-import edu.teamrocket.payment.CreditCard;
+import edu.teamrocket.payment.PaymentMethod;
 
 public interface GuestDispatcher {
 
-    public void dispatch(CreditCard card);
+    public void dispatch(PaymentMethod card);
 }
